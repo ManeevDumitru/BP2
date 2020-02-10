@@ -3,38 +3,41 @@ class Group {
     this.students = [];
   }
 
-  createArray() {
-    const n = 3;
+  createArray(n, m) {
     for (let i = 0; i < n; i++) {
       this.students.push([]);
-      for (let j = 0; j < n; j++) {
-        this.students[i][j] = {};
-        this.students[i][j].name = `${j + 1}-th student`;
-        this.students[i][j].mark = `${Number(((Math.random() * 5) + 5).toFixed(2))}`;
-        this.students[i][j].age = `${Number(Math.floor(Math.random() * 4) + 18)}`;
-
+      for (let j = 0; j < m; j++) {
+        this.students[i][j] = {
+          name: `${j + 1}-th student`,
+          mark: `${Number(((Math.random() * 5) + 5).toFixed(2))}`,
+          age: `${Number(Math.floor(Math.random() * 4) + 18)}`
+        };
       }
     }
     console.log(this.students);
     return this.students;
   }
 
-  calculateAverage() {
-    const n = 3;
-    let average = 0;
+  calculateAverage(n, m) {
+    let averageArray = [];
+    let average;
     for (let i = 0; i < n; i++) {
-      for (let j = 0; j < n; j++) {
+      average = 0;
+      for (let j = 0; j < m; j++) {
         average += Number(this.students[i][j].mark);
         console.log(this.students[i][j].mark);
       }
+      averageArray.push(Number((average / m).toFixed(2)));
     }
-    console.log(average / (n * n));
+    console.log(averageArray);
   }
 
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  let group = new Group();
-  group.createArray();
-  group.calculateAverage();
+  document.getElementById('startBut').addEventListener('click', () => {
+    let group = new Group();
+    group.createArray(document.getElementById('n').value, document.getElementById('m').value);
+    group.calculateAverage(document.getElementById('n').value, document.getElementById('m').value);
+  });
 });
