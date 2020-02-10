@@ -32,6 +32,19 @@ class Group {
     console.log(averageArray);
   }
 
+  showResult(n, m) {
+    document.getElementById('result').innerHTML = '';
+    console.log("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+    for (let i = 0; i < n; i++) {
+      document.getElementById('result').innerHTML += `\n${i + 1} Group \n`;
+      for (let j = 0; j < m; j++) {
+        document.getElementById('result').innerHTML += `${this.students[i][j].name}: `;
+        document.getElementById('result').innerHTML += `Mark ${this.students[i][j].mark} `;
+        document.getElementById('result').innerHTML += `Age: ${this.students[i][j].age} `;
+      }
+      document.getElementById('result').innerHTML += '<br>'
+    }
+  }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -39,5 +52,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let group = new Group();
     group.createArray(document.getElementById('n').value, document.getElementById('m').value);
     group.calculateAverage(document.getElementById('n').value, document.getElementById('m').value);
+    group.showResult(document.getElementById('n').value, document.getElementById('m').value);
   });
 });
